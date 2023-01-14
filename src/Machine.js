@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
+import './Machine.css';
+import Joke from './Joke.js';
 
 class Machine extends Component {
     render() {
         return (
-            <h1>Machine goes here!</h1>
+            <div>
+                <Joke />
+            </div>
         )
     }
 }
