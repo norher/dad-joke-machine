@@ -26,7 +26,18 @@ class Machine extends Component {
     render() {
         return (
             <div className='Machine'>
-                <h1>Dad Jokes</h1>
+                <div className='Machine-sidebar'>
+                    <h1 className='Machine-Title'>
+                        <span>Dad</span> Jokes
+                    </h1>
+                    <img 
+                        src='https://www.maxpixel.net/static/photo/640/Comic-Funny-Emotion-Yellow-Smiley-Emoticon-Emoji-4832492.png' 
+                        alt='laughing crying face'
+                        height={325}
+                        width={325} 
+                    />
+                    <button>Get Jokes!</button>
+                </div>
                 <div className='Machine-Jokes'>
                     {this.state.jokes.map(j => (
                         <div>{j}</div>

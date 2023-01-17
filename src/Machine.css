@@ -1,0 +1,9 @@
+.Machine {
+    display: flex;
+    flex-direction: row;
+}
+
+.Machine-sidebar {
+    display: inherit;
+    flex-direction: column;
+}
