@@ -1,9 +1,46 @@
 .Machine {
     display: flex;
     flex-direction: row;
+    width: 80%;
+    height: 80%;
 }
 
 .Machine-sidebar {
-    display: inherit;
+    background: #9575cd;
+    display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 30%;
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12 px rgba(0, 0, 0, 0.1)
+        inset 0 0 25px #7e57c2;
+        z-index: 2;
+}
+
+.Machine-Title {
+    font-size: 4rem;
+    margin: 2rem;
+    color: white;
+    font-weight: 150;
+    letter-spacing: 0.6rem;
+}
+
+.Machine-Title span {
+    font-weight: 700;
+    letter-spacing: 0;
+}
+
+.Machine-sidebar img {
+    width: 50%;
+    border-radius: 50%;
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.1);
+}
+
+.Machine-Jokes {
+    height: 90%;
+    background: white;
+    align-self: center;
+    width: 70%;
+    /* overflow: scroll; */
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.1);
 }
