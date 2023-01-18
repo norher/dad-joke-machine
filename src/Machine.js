@@ -9,6 +9,7 @@ class Machine extends Component {
         this.state = {
             jokes: JSON.parse(window.localStorage.getItem('jokes') || "[]")
         };
+        this.handleClick = this.handleClick.bind(this);
     }
     static defaultProps = {
         numJokes : 10
@@ -24,18 +25,24 @@ class Machine extends Component {
             });
             jokes.push({ text: res.data.joke, id: res.data.id, votes: 0 });
         }
-        this.setState({jokes: jokes});
-        window.localStorage.setItem("jokes", JSON.stringify(jokes));
+        this.setState(st => ({
+            jokes: [...st.jokes, ...jokes]
+        }),
+        () => window.localStorage.setItem("jokes", JSON.stringify(this.state.jokes))
+        );
     }
     handleVote(id, delta) {
         this.setState(
             st => ({
                 jokes: st.jokes.map(j =>
                     j.id === id ? { ...j, votes: j.votes + delta } : j )
-            })
-        )
+            }),
+        () => window.localStorage.setItem("jokes", JSON.stringify(this.state.jokes))
+        );
     }
-
+    handleClick(){
+        this.getJokes()
+    }
 
     render() {
         return (
@@ -50,7 +57,7 @@ class Machine extends Component {
                         height={325}
                         width={325} 
                     />
-                    <button className='Machine-getmore'>Get Jokes!</button>
+                    <button className='Machine-getmore' onClick={this.handleClick}>Get Jokes!</button>
                 </div>
                 <div className='Machine-Jokes'>
                     {this.state.jokes.map(j => (
