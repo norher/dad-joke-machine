@@ -7,7 +7,8 @@ class Machine extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            jokes: JSON.parse(window.localStorage.getItem('jokes') || "[]")
+            jokes: JSON.parse(window.localStorage.getItem('jokes') || "[]"),
+            loading: false
         };
         this.handleClick = this.handleClick.bind(this);
     }
@@ -26,6 +27,7 @@ class Machine extends Component {
             jokes.push({ text: res.data.joke, id: res.data.id, votes: 0 });
         }
         this.setState(st => ({
+            loading: false,
             jokes: [...st.jokes, ...jokes]
         }),
         () => window.localStorage.setItem("jokes", JSON.stringify(this.state.jokes))
@@ -41,10 +43,18 @@ class Machine extends Component {
         );
     }
     handleClick(){
-        this.getJokes()
+        this.setState({ loading: true }, this.getJokes)
     }
 
     render() {
+        if(this.state.loading){
+            return(
+                <div className='Machine-spinner'>
+                    <i className='far fa-8x fa-laugh fa-spin' />
+                    <h1 className='Machine-Title'> Loading</h1>
+                </div>
+            )
+        }
         return (
             <div className='Machine'>
                 <div className='Machine-sidebar'>
