@@ -6,12 +6,17 @@ import axios from 'axios';
 class Machine extends Component {
     constructor(props) {
         super(props);
-        this.state = { jokes: []}
+        this.state = {
+            jokes: JSON.parse(window.localStorage.getItem('jokes') || "[]")
+        };
     }
     static defaultProps = {
         numJokes : 10
     };
-    async componentDidMount() {
+    componentDidMount() {
+        if(this.state.jokes.length === 0) this.getJokes();
+    }
+    async getJokes() {
         let jokes = [];
         while(jokes.length < this.props.numJokes){
             let res = await axios.get("https://icanhazdadjoke.com/", {
@@ -20,6 +25,7 @@ class Machine extends Component {
             jokes.push({ text: res.data.joke, id: res.data.id, votes: 0 });
         }
         this.setState({jokes: jokes});
+        window.localStorage.setItem("jokes", JSON.stringify(jokes));
     }
     handleVote(id, delta) {
         this.setState(
