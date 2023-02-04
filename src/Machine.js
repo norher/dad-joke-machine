@@ -13,8 +13,7 @@ class Machine extends Component {
             jokes: JSON.parse(window.localStorage.getItem('jokes') || "[]"),
             loading: false
         };
-        this.seenJokes = new Set(this.state.jokes.map(j => j.text));
-        console.log(this.seenJokes);
+        this.seenJokes = new Set(this.state.jokes.map(j => j.id));
         this.handleClick = this.handleClick.bind(this);
     }
     componentDidMount() {
@@ -29,15 +28,14 @@ class Machine extends Component {
                 });
             let newJoke = res.data.joke;
             let jokeId = res.data.id;
-            if (!this.seenJoke.has(newJoke)) {
-                jokes.push({ text: newJoke, id: jokeId, votes: 0 });
+            if (!this.seenJokes.has(jokeId)){
+                jokes.push({ text:newJoke, id: jokeId, votes: 0 });
             } else {
-                console.log("FOUND A DUPLICATE");
-                console.log(newJoke);
+                console.log(`FOUND A DUPLICATE '${newJoke}'`);
             }
-        }
+        };
         this.setState(st => ({
-            loading: false,
+            loading: false, 
             jokes: [...st.jokes, ...jokes]
         }),
         () => window.localStorage.setItem("jokes", JSON.stringify(this.state.jokes))
@@ -56,10 +54,9 @@ class Machine extends Component {
         () => window.localStorage.setItem("jokes", JSON.stringify(this.state.jokes))
         );
     }
-    handleClick(){
+    handleClick() {
         this.setState({ loading: true }, this.getJokes)
     }
-
     render() {
         if(this.state.loading){
             return(
