@@ -79,7 +79,7 @@ class Machine extends Component {
                         height={325}
                         width={325} 
                     />
-                    <button className='Machine-getmore' onClick={this.handleClick}>Get Jokes!</button>
+                    <button className='Machine-getmore' onClick={this.handleClick}>Fetch Jokes!</button>
                 </div>
                 <div className='Machine-Jokes'>
                     {jokes.map(j => (
