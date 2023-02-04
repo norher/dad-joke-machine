@@ -66,6 +66,7 @@ class Machine extends Component {
                 </div>
             )
         }
+        let jokes = this.state.jokes.sort((a, b) => b.votes - a.votes);
         return (
             <div className='Machine'>
                 <div className='Machine-sidebar'>
@@ -81,7 +82,7 @@ class Machine extends Component {
                     <button className='Machine-getmore' onClick={this.handleClick}>Get Jokes!</button>
                 </div>
                 <div className='Machine-Jokes'>
-                    {this.state.jokes.map(j => (
+                    {jokes.map(j => (
                         <Joke 
                             key={j.id} 
                             votes={j.votes} 
